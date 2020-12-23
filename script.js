@@ -48,6 +48,17 @@ searchButton.click(function() {
             // Incrementing keyCount to store and retrieve a full list of key/value pairs from localStorage
             keyCount = keyCount + 1;
 
+            // Call city-name into Current Weather
+            var currentWeather = $("#city-name");
+            console.log(currentWeather)
+            currentWeather.empty();
+
+            // Adjust Date 
+            var timeUTC = new Date(response.dt * 1000);
+            currentWeather.append(response.name + " " + timeUTC.toLocaleDateString("en-US"));
+            currentWeather.append(`<img src="https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png">`);
+
+
             })
     }
 })
