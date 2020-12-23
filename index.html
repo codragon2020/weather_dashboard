@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
     <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand h1 w-100 x-large text-center">Weather Dashboard</span>
     </nav>
@@ -22,16 +24,17 @@
                 <p class="search-header my-1">Search for a city</p>
                 <!-- Input for searching a city -->
                 <div class="input-group mb-3">
-                    <input id="city-input" type="text" class="form-control" placeholder="Enter city name" aria-label="Enter city name">
+                    <input id="city-input" type="text" class="form-control searchInput" placeholder="Enter city name" aria-label="Enter city name">
                     <!-- Search button -->
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button" id="search-button">
+                        <button class="btn btn-primary searchButton" type="button" id="search-button">
                         <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </div>
                 <!-- Clear History button to delete localStorage history -->
                 <button class="btn btn-primary mb-3" type="button" id="clear-history">Clear history</button>
+                <form id="history"></form>
             </div>
             <div class="col-8">
                 <div class="row mr-0">
@@ -39,7 +42,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <span id="city-name" class="city-name" align-middle">City</span>
-                                <img id="current-pic" src="placeholder" alt="">
+                                <!-- <img id="current-pic" src="placeholder" alt=""> -->
                             </div>
                         </div>
                         <div class="row">

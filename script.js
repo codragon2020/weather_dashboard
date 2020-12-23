@@ -1,11 +1,30 @@
-var inputEl = document.getElementById("city-input");
-var searchEl = document.getElementById("search-button");
-var clearEl = document.getElementById("clear-history");
-var nameEl = document.getElementById("city-name");
-var currentPicEl = document.getElementById("current-pic");
-var currentTempEl = document.getElementById("temperature");
-var currentHumidityEl = document.getElementById("humidity");4
-var currentWindEl = document.getElementById("wind-speed");
-var currentUVEl = document.getElementById("UV-index");
 
-var APIKey = "98e7da6ba47e6e46bbb4c11d566fa749"
+
+var apiKey = "98e7da6ba47e6e46bbb4c11d566fa749"
+
+var searchButton = $("#search-button");
+console.log(searchButton)
+// var inputEl = $(".searchInput").val();
+// console.log(inputEl)
+searchButton.click(function() {
+    // Take the input of the city-input text field
+    var inputEl = $("#city-input").val();
+    console.log(inputEl)
+
+    // Variable for current weather
+    var urlCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + inputEl + "&Appid=" + apiKey + "&units=imperial";
+    console.log(urlCurrent)
+    // Variable for 5 day forecast
+    var urlFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + inputEl + "&Appid=" + apiKey + "&units=imperial";
+    
+    if (inputEl == "") {
+        console.log('This is the empty input', inputEl);
+    } else {
+        $.ajax({
+            url: urlCurrent,
+            method: "GET"
+        }).then(function(response){
+            console.log(response)
+            })
+    }
+})
