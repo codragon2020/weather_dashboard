@@ -6,6 +6,19 @@ var searchButton = $("#search-button");
 console.log(searchButton)
 // var inputEl = $(".searchInput").val();
 // console.log(inputEl)
+
+var keyCount = 0;
+
+// Forloop for persisting the data onto HMTL page
+for (var i = 0; i < localStorage.length; i++) {
+
+    var city = localStorage.getItem(i);
+    // console.log(localStorage.getItem("City"));
+    var cityName = $("#history").addClass("history-list");
+
+    cityName.append("<li>" + city + "</li>");
+}
+
 searchButton.click(function() {
     // Take the input of the city-input text field
     var inputEl = $("#city-input").val();
@@ -28,7 +41,13 @@ searchButton.click(function() {
             console.log(response)
             console.log(response.name)
             var cityName = $("#history").addClass("history-list");
-            cityName.append("<li>" + response.name + "</li>");
+            cityName.prepend("<li>" + response.name + "</li>");
+
+            // Local storage is setting the keycount and response.name as the key/value pair
+            var local = localStorage.setItem(keyCount, response.name);
+            // Incrementing keyCount to store and retrieve a full list of key/value pairs from localStorage
+            keyCount = keyCount + 1;
+
             })
     }
 })
