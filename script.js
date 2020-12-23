@@ -9,22 +9,26 @@ console.log(searchButton)
 searchButton.click(function() {
     // Take the input of the city-input text field
     var inputEl = $("#city-input").val();
-    console.log(inputEl)
+    console.log('initial call to city-input', inputEl)
 
     // Variable for current weather
     var urlCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + inputEl + "&Appid=" + apiKey + "&units=imperial";
-    console.log(urlCurrent)
+    // console.log(urlCurrent)
     // Variable for 5 day forecast
     var urlFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + inputEl + "&Appid=" + apiKey + "&units=imperial";
     
     if (inputEl == "") {
         console.log('This is the empty input', inputEl);
     } else {
+        console.log('The city-input is ', inputEl)
         $.ajax({
             url: urlCurrent,
             method: "GET"
         }).then(function(response){
             console.log(response)
+            console.log(response.name)
+            var cityName = $("#history").addClass("history-list");
+            cityName.append("<li>" + response.name + "</li>");
             })
     }
 })
