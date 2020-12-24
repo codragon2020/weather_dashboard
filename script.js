@@ -9,6 +9,13 @@ console.log(searchButton)
 
 var keyCount = 0;
 
+var clearHistory = $('#clear-history');
+
+clearHistory.click(function() {
+    $(".history-list").empty();
+    localStorage.clear();
+})
+
 // For loop for persisting the data onto HMTL page
 for (var i = 0; i < localStorage.length; i++) {
 
@@ -66,6 +73,7 @@ searchButton.click(function() {
 
             // Add temperature
             var currentTemp = $("#temperature");
+            
             currentTemp.append('Temperature: ' + response.main.temp + '\u00B0');
 
             // Add humidity
