@@ -9,7 +9,7 @@ console.log(searchButton)
 
 var keyCount = 0;
 
-// Forloop for persisting the data onto HMTL page
+// For loop for persisting the data onto HMTL page
 for (var i = 0; i < localStorage.length; i++) {
 
     var city = localStorage.getItem(i);
@@ -19,6 +19,7 @@ for (var i = 0; i < localStorage.length; i++) {
     cityName.append("<li>" + city + "</li>");
 }
 
+// searchButton click function to make AJAX calls to weather api and utilize response
 searchButton.click(function() {
     // Take the input of the city-input text field
     var inputEl = $("#city-input").val();
@@ -30,7 +31,9 @@ searchButton.click(function() {
     // Variable for 5 day forecast
     var urlFiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + inputEl + "&Appid=" + apiKey + "&units=imperial";
     
+    // TODO: Try to send a response of invalid when logging 404
     if (inputEl == "") {
+        alert('Must type in a valid city name');
         console.log('This is the empty input', inputEl);
     } else {
         console.log('The city-input is ', inputEl)
