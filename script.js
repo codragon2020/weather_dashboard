@@ -51,10 +51,12 @@ searchButton.click(function() {
             // Incrementing keyCount to store and retrieve a full list of key/value pairs from localStorage
             keyCount = keyCount + 1;
 
+            var currentWeather = $(".currentWeather");
+            currentWeather.empty();
+
             // Call city-name into Current Weather
             var currentCity = $("#city-name");
             console.log(currentCity)
-            currentCity.empty();
 
             // Adjust Date 
             var timeUTC = new Date(response.dt * 1000);
@@ -75,23 +77,13 @@ searchButton.click(function() {
             
 
             // UV Index URL
-            var urlUV = `https://api.openweathermap.org/data/2.5/uvi?appid=98e7da6ba47e6e46bbb4c11d566fa749&lat=${response.coord.lat}&lon=${response.coord.lon}`;
             var oneCallUv = `https://api.openweathermap.org/data/2.5/onecall?appid=98e7da6ba47e6e46bbb4c11d566fa749&lat=${response.coord.lat}&lon=${response.coord.lon}`;
-            // UV Index
-            $.ajax({
-                url: urlUV,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response)
-            });
 
             // UV Index
             $.ajax({
                 url: oneCallUv,
                 method: "GET"
             }).then(function (response) {
-                console.log(response)
-                console.log(response.current.uvi)
                 var currentUv = $("#uv-index");
                 currentUv.append('UV Index: ' + response.current.uvi);
 
