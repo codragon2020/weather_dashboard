@@ -25,3 +25,13 @@ li {
 #city-name {
     font-size: 30px;
 }
+
+.fiveDayColor {
+    padding: 20px;
+    float: left;
+    margin: 10px;
+    border: 1px solid lightgray;
+    background-color: #1E90FF;
+    color: white;
+    border-radius: 5%;
+}
