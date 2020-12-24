@@ -51,6 +51,7 @@ searchButton.click(function() {
             // Incrementing keyCount to store and retrieve a full list of key/value pairs from localStorage
             keyCount = keyCount + 1;
 
+            // Empty the elements before every new call is made
             var currentWeather = $(".currentWeather");
             currentWeather.empty();
 
@@ -65,7 +66,7 @@ searchButton.click(function() {
 
             // Add temperature
             var currentTemp = $("#temperature");
-            currentTemp.append('Temperature: ' + response.main.temp);
+            currentTemp.append('Temperature: ' + response.main.temp + '\u00B0');
 
             // Add humidity
             var currentHumidity = $("#humidity");
@@ -73,7 +74,7 @@ searchButton.click(function() {
 
             // Add wind speed
             var currentWind = $("#wind-speed");
-            currentWind.append('Wind Speed: ' + response.wind.speed)
+            currentWind.append('Wind Speed: ' + response.wind.speed + ' MPH')
             
 
             // UV Index URL
@@ -86,7 +87,6 @@ searchButton.click(function() {
             }).then(function (response) {
                 var currentUv = $("#uv-index");
                 currentUv.append('UV Index: ' + response.current.uvi);
-
             });
 
         })
