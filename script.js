@@ -1,16 +1,9 @@
-
-
 var apiKey = "98e7da6ba47e6e46bbb4c11d566fa749"
-
 var searchButton = $("#search-button");
-console.log(searchButton)
-// var inputEl = $(".searchInput").val();
-// console.log(inputEl)
-
 var keyCount = 0;
-
 var clearHistory = $('#clear-history');
 
+// Button for clear-history will empty the list and clear localStorage
 clearHistory.click(function() {
     $(".history-list").empty();
     localStorage.clear();
@@ -73,8 +66,7 @@ searchButton.click(function() {
 
             // Add temperature
             var currentTemp = $("#temperature");
-            
-            currentTemp.append('Temperature: ' + response.main.temp + '\u00B0');
+            currentTemp.append('Temperature: ' + (Math.trunc(response.main.temp)) + '\u00B0');
 
             // Add humidity
             var currentHumidity = $("#humidity");
@@ -115,7 +107,7 @@ searchButton.click(function() {
                 var FiveDayTimeUTC1 = new Date(response.list[i].dt * 1000);
                 FiveDayTimeUTC1 = FiveDayTimeUTC1.toLocaleDateString("en-US");
 
-                fiveDayDiv.append("<div class=fiveDayColor>" + "<p>" + FiveDayTimeUTC1 + "</p>" + `<img src="https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png">` + "<p>" + "Temp: " + response.list[i].main.temp + "</p>" + "<p>" + "Humidity: " + response.list[i].main.humidity + "%" + "</p>" + "</div>");
+                fiveDayDiv.append("<div class=fiveDayColor>" + "<p>" + FiveDayTimeUTC1 + "</p>" + `<img src="https://openweathermap.org/img/wn/${response.list[i].weather[0].icon}@2x.png">` + "<p>" + "Temp: " + (Math.trunc(response.list[i].main.temp)) + "</p>" + "<p>" + "Humidity: " + response.list[i].main.humidity + "%" + "</p>" + "</div>");
             })
         })
     
