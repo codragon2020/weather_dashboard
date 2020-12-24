@@ -52,16 +52,51 @@ searchButton.click(function() {
             keyCount = keyCount + 1;
 
             // Call city-name into Current Weather
-            var currentWeather = $("#city-name");
-            console.log(currentWeather)
-            currentWeather.empty();
+            var currentCity = $("#city-name");
+            console.log(currentCity)
+            currentCity.empty();
 
             // Adjust Date 
             var timeUTC = new Date(response.dt * 1000);
-            currentWeather.append(response.name + " " + timeUTC.toLocaleDateString("en-US"));
-            currentWeather.append(`<img src="https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png">`);
+            currentCity.append(response.name + " " + timeUTC.toLocaleDateString("en-US"));
+            currentCity.append(`<img src="https://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png">`);
 
+            // Add temperature
+            var currentTemp = $("#temperature");
+            currentTemp.append('Temperature: ' + response.main.temp);
 
-            })
+            // Add humidity
+            var currentHumidity = $("#humidity");
+            currentHumidity.append('Humidity: ' + response.main.humidity + '%')
+
+            // Add wind speed
+            var currentWind = $("#wind-speed");
+            currentWind.append('Wind Speed: ' + response.wind.speed)
+            
+
+            // UV Index URL
+            var urlUV = `https://api.openweathermap.org/data/2.5/uvi?appid=98e7da6ba47e6e46bbb4c11d566fa749&lat=${response.coord.lat}&lon=${response.coord.lon}`;
+            var oneCallUv = `https://api.openweathermap.org/data/2.5/onecall?appid=98e7da6ba47e6e46bbb4c11d566fa749&lat=${response.coord.lat}&lon=${response.coord.lon}`;
+            // UV Index
+            $.ajax({
+                url: urlUV,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response)
+            });
+
+            // UV Index
+            $.ajax({
+                url: oneCallUv,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response)
+                console.log(response.current.uvi)
+                var currentUv = $("#uv-index");
+                currentUv.append('UV Index: ' + response.current.uvi);
+
+            });
+
+        })
     }
 })
