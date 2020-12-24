@@ -26,8 +26,14 @@ li {
     font-size: 30px;
 }
 
+/* styles for img size  */
+img {
+    width: 100px;
+    height: 100px;
+}
+
 .fiveDayColor {
-    padding: 20px;
+    padding: 8px;
     float: left;
     margin: 10px;
     border: 1px solid lightgray;
