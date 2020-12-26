@@ -3,6 +3,16 @@ var searchButton = $("#search-button");
 var keyCount = 0;
 var clearHistory = $('#clear-history');
 
+// var x = document.getElementById("demo");
+
+function initPage() {
+
+}
+initPage();
+
+
+  
+
 // Button for clear-history will empty the list and clear localStorage
 clearHistory.click(function() {
     $(".history-list").empty();

@@ -22,6 +22,9 @@
             <div class="col-4 bg-light">
                 <!-- Header for Search feature -->
                 <p class="search-header my-1">Search for a city</p>
+                
+                <button onclick="getLocation()">Current Location</button><br><br>
+                
                 <!-- Input for searching a city -->
                 <div class="input-group mb-3">
                     <input id="city-input" type="text" class="form-control searchInput" placeholder="Enter city name" aria-label="Enter city name">
@@ -32,6 +35,7 @@
                         </button>
                     </div>
                 </div>
+                
                 <!-- Clear History button to delete localStorage history -->
                 <button class="btn btn-primary mb-3" type="button" id="clear-history">Clear history</button>
                 
@@ -93,5 +97,6 @@
         </div>
     </div>
     <script src="./script.js"></script>
+    <script src="./curLocation.js"></script>
 </body>
 </html>
