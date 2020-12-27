@@ -10,7 +10,7 @@ function getLocation() {
     } 
   }
 
-function getWeather() {
+// function getWeather() {
     // Variable for current weather
     var urlCurrent = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&Appid=" + apiKey + "&units=imperial";
     // Variable for 5 day forecast
