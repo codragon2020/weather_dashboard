@@ -1,43 +1,16 @@
-/* Navbar styles */
 .navbar-brand {
     font-size: 36px;
 }
 
-/* Search Header */
 .search-header {
     font-size: 24px;
     font-weight: bold;
 }
 
-/* ul styles */
-ul {
-    list-style: none;
-}
-
-/* styles for Li */
-li {
-    border: 1px solid lightgray;
-    text-align: left;
-    padding-left: 10px;
-
-}
-
-#city-name {
+.city-name {
     font-size: 30px;
 }
 
-/* styles for img size  */
-img {
-    width: 100px;
-    height: 100px;
-}
-
-.fiveDayColor {
-    padding: 8px;
-    float: left;
-    margin: 10px;
-    border: 1px solid lightgray;
-    background-color: #1E90FF;
-    color: white;
-    border-radius: 5%;
+.forecast-date {
+    font-size: 18px;
 }
