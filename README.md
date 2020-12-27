@@ -4,7 +4,7 @@ This app will use the [OpenWeather API](https://openweathermap.org/api) to retri
 
 ## Description
 
-When a user initiates the webpage, the OpenWeatherMap API will lookup their coordinates and allowing of the location tracker to run, their current location will be output into the Weather Dashboard. 
+When a user initiates the webpage, the OpenWeatherMap API will lookup their coordinates. By allowing location tracker to run, their current location will be output into the Weather Dashboard. 
 
 Anytime a user inputs a city name into the search feature the AJAX call will lookup the current and 5-day forecasted weather of the requested city.
 
@@ -14,9 +14,9 @@ The 5-Day Forecast will show the next 5 days after the current day in individual
 
 As the user searches for different city names, each city name will be stored in localStorage. As the localStorage is set, the form below the Clear History button will populate with the city name. When the city name is selected the Weather Dashboard will be updated accordingly.
 
-If the user wishes to clear the history of their city searches, they may use the Clear History button. Clicking on this button will remove all the cities from the stored array and the localStorage.
+If the user wishes to clear the history of their city searches, they may use the Clear History button. Clicking on this button will remove all the cities from the stored array and the localStorage. After which the searches are unretrievable.
 
-Anytime a user reloads the page the current location call is made to look up the user's coordinates and fetch the current weather.
+Anytime a user reloads the page the current location call is made to look up the user's coordinates and fetch the current weather. This will result in a an alert of the location lookup request being sent to the user.
 
 ## Link to Site
 
