@@ -32,7 +32,9 @@ function initPage() {
             console.log(weatherPic);
             currentPicEl.setAttribute("src","https://openweathermap.org/img/wn/" + weatherPic + "@2x.png");
             currentPicEl.setAttribute("alt",response.weather[0].description);
-
+            currentTempEl.innerHTML = "Temperature: " + k2f(response.main.temp) + " &#176F";
+            currentHumidityEl.innerHTML = "Humidity: " + response.main.humidity + "%";
+            currentWindEl.innerHTML = "Wind Speed: " + response.wind.speed + " MPH";
         
         })
     }
@@ -45,5 +47,9 @@ function initPage() {
         // renderSearchHistory();
     })
 
+    function k2f(K) {
+        return Math.floor((K - 273.15) *1.8 +32);
+    }
+    
 }
 initPage();
