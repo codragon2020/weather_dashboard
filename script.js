@@ -148,6 +148,10 @@ function initPage() {
             console.log(response);
             var cityName = response.name;
             getWeather(cityName);
+            searchHistory.push(cityName);
+            localStorage.setItem("search",JSON.stringify(searchHistory));
+            renderSearchHistory();
+
         });
     }
 
