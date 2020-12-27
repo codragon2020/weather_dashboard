@@ -98,6 +98,7 @@ function initPage() {
 
     clearEl.addEventListener("click",function() {
         searchHistory = [];
+        localStorage.clear();
         renderSearchHistory();
     })
 
