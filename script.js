@@ -1,3 +1,4 @@
+// Initiate page 
 function initPage() {
     const inputEl = document.getElementById("city-input");
     const searchEl = document.getElementById("search-button");
@@ -12,8 +13,10 @@ function initPage() {
     let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
     console.log(searchHistory);
   
+    // Personal API key - Do not use
     const APIKey = "98e7da6ba47e6e46bbb4c11d566fa749";
 
+    // Get Weather function for Current and Forecast 
     function getWeather(cityName) {
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIKey;
         $.ajax({
