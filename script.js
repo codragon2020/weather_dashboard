@@ -36,6 +36,22 @@ function initPage() {
             currentHumidityEl.innerHTML = "Humidity: " + response.main.humidity + "%";
             currentWindEl.innerHTML = "Wind Speed: " + response.wind.speed + " MPH";
         
+        
+        let lat = response.coord.lat;
+        let lon = response.coord.lon;
+        let UVQueryURL = "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&cnt=1";
+        $.ajax({
+            url: UVQueryURL,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            let UVIndex = document.createElement("span");
+            UVIndex.setAttribute("class","badge badge-danger");
+            UVIndex.innerHTML = response[0].value;
+            currentUVEl.innerHTML = "UV Index: ";
+            currentUVEl.append(UVIndex);
+        })
+
         })
     }
 
@@ -50,6 +66,6 @@ function initPage() {
     function k2f(K) {
         return Math.floor((K - 273.15) *1.8 +32);
     }
-    
+
 }
 initPage();
