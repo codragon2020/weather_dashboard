@@ -62,7 +62,7 @@ function initPage() {
         }).then(function(response){
             console.log(response);
             const forecastEls = document.querySelectorAll(".forecast");
-            for (i=0; i<forecastEls.length; i++) {
+            for (i = 0; i < forecastEls.length; i++) {
                 forecastEls[i].innerHTML = "";
                 const forecastIndex = i*8 + 4;
                 const forecastDate = new Date(response.list[forecastIndex].dt * 1000);
@@ -108,9 +108,8 @@ function initPage() {
 
     function renderSearchHistory() {
         historyEl.innerHTML = "";
-        for (let i=0; i<searchHistory.length; i++) {
+        for (let i = 0; i < searchHistory.length; i++) {
             const historyItem = document.createElement("input");
-            // <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"></input>
             historyItem.setAttribute("type","text");
             historyItem.setAttribute("readonly",true);
             historyItem.setAttribute("class", "form-control d-block bg-white");
