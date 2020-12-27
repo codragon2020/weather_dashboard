@@ -126,5 +126,33 @@ function initPage() {
         getWeather(searchHistory[searchHistory.length - 1]);
     }
 
+    function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
+            console.log(lat+" "+lon);
+            getCurWeather();
+          });
+        } 
+      }
+
+      function getCurWeather() {
+        // Variable for current weather
+        var urlCurrent = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&Appid=" + APIKey + "&units=imperial";
+        
+        $.ajax({
+            url: urlCurrent,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            var cityName = response.name;
+            getWeather(cityName);
+        });
+    }
+
+    getLocation();
+
 }
+
 initPage();
