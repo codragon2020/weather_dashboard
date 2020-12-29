@@ -47,15 +47,25 @@ function initPage() {
             url: UVQueryURL,
             method: "GET"
         }).then(function(response){
+            console.log(response)
+            console.log(response.daily[0].uvi)
             // Creating a span to contain the uv index
             let UVIndex = document.createElement("span");
-            // To do: Needs to be updated to reflect the severity of the uv index
-            UVIndex.setAttribute("class","badge badge-danger");
-            UVIndex.innerHTML = response.current.uvi;
+            // Most acccurate uv index is currently available from the daily object
+            UVIndex.innerHTML = response.daily[0].uvi;
+            // Used UV Index table to determine Low, Moderate, or High risk of sun exposure 
+            // https://en.wikipedia.org/wiki/Ultraviolet_index
+            if (UVIndex.innerHTML > 6) {
+                UVIndex.setAttribute("class","badge badge-danger");
+            } else if (UVIndex.innerHTML > 3) {
+                UVIndex.setAttribute("class","badge badge-warning");
+            } else {
+                UVIndex.setAttribute("class","badge badge-success");
+            }
             currentUVEl.innerHTML = "UV Index: ";
             currentUVEl.append(UVIndex);
         });
-        
+
         // 5-Day forecast call
         let cityID = response.id;
         let forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
