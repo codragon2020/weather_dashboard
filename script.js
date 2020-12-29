@@ -55,6 +55,7 @@ function initPage() {
             currentUVEl.innerHTML = "UV Index: ";
             currentUVEl.append(UVIndex);
         });
+        
         // 5-Day forecast call
         let cityID = response.id;
         let forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
@@ -163,7 +164,6 @@ function initPage() {
             searchHistory.push(cityName);
             localStorage.setItem("search",JSON.stringify(searchHistory));
             renderSearchHistory();
-
         });
     }
 

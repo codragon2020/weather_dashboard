@@ -1,16 +1,20 @@
+/* Navbar styling */
 .navbar-brand {
     font-size: 36px;
 }
 
+/* Search Header styling */
 .search-header {
     font-size: 24px;
     font-weight: bold;
 }
 
+/* City name styling */
 .city-name {
     font-size: 30px;
 }
 
+/* Forecast date styling */
 .forecast-date {
     font-size: 18px;
 }
