@@ -53,7 +53,7 @@ function initPage() {
             let UVIndex = document.createElement("span");
             // Most acccurate uv index is currently available from the daily object
             UVIndex.innerHTML = response.daily[0].uvi;
-            // Used UV Index table to determine Low, Moderate, or High risk of sun exposure 
+            // Used UV Index table to determine favorable, moderate, or severe conditions
             // https://en.wikipedia.org/wiki/Ultraviolet_index
             if (UVIndex.innerHTML > 6) {
                 UVIndex.setAttribute("class","badge badge-danger");
