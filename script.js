@@ -23,37 +23,39 @@ function initPage() {
             url: queryURL,
             method: "GET"
         }).then(function(response){
-            console.log(response.dt);
-            console.log(response);
+            // Uses the Date constructor to return the date timestamp * 1000 ms
             const currentDate = new Date(response.dt*1000);
-            // console.log(currentDate);
             const day = currentDate.getDate();
+            // Returns the month of the year in numerical value of 0-11, so add 1
             const month = currentDate.getMonth() + 1;
             const year = currentDate.getFullYear();
             nameEl.innerHTML = response.name + " (" + month + "/" + day + "/" + year + ") ";
+            // Calls the weather icon object
             let weatherPic = response.weather[0].icon;
-            console.log(weatherPic);
             currentPicEl.setAttribute("src","https://openweathermap.org/img/wn/" + weatherPic + "@2x.png");
             currentPicEl.setAttribute("alt",response.weather[0].description);
+            // Calls the temp, humidity, and wind speed objects
             currentTempEl.innerHTML = "Temperature: " + k2f(response.main.temp) + " &#176F";
             currentHumidityEl.innerHTML = "Humidity: " + response.main.humidity + "%";
             currentWindEl.innerHTML = "Wind Speed: " + response.wind.speed + " MPH";
         
-        
+        // Getting longitude and latitude for the one-call-api
         let lat = response.coord.lat;
         let lon = response.coord.lon;
-        let UVQueryURL = "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&cnt=1";
+        let UVQueryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&cnt=1";
         $.ajax({
             url: UVQueryURL,
             method: "GET"
         }).then(function(response){
-            console.log(response);
+            // Creating a span to contain the uv index
             let UVIndex = document.createElement("span");
+            // To do: Needs to be updated to reflect the severity of the uv index
             UVIndex.setAttribute("class","badge badge-danger");
-            UVIndex.innerHTML = response[0].value;
+            UVIndex.innerHTML = response.current.uvi;
             currentUVEl.innerHTML = "UV Index: ";
             currentUVEl.append(UVIndex);
         });
+        // 5-Day forecast call
         let cityID = response.id;
         let forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
         $.ajax({
@@ -61,9 +63,11 @@ function initPage() {
             method: "GET"
         }).then(function(response){
             console.log(response);
+            // Grab all elements with forecast class
             const forecastEls = document.querySelectorAll(".forecast");
             for (i = 0; i < forecastEls.length; i++) {
                 forecastEls[i].innerHTML = "";
+                // Index created to pull from the response.list and set the date time stamp  and other attributes appropriately
                 const forecastIndex = i*8 + 4;
                 const forecastDate = new Date(response.list[forecastIndex].dt * 1000);
                 const forecastDay = forecastDate.getDate();
@@ -88,6 +92,7 @@ function initPage() {
         });
     }
 
+    // Search event listener takes city, runs getWeather function, and pushes the searchHistory and runs renderSearchHistory
     searchEl.addEventListener("click",function() {
         const searchTerm = inputEl.value;
         getWeather(searchTerm);
@@ -96,24 +101,29 @@ function initPage() {
         renderSearchHistory();
     })
 
+    // Clears the searchHistory array on page and localStorage on computer
     clearEl.addEventListener("click",function() {
         searchHistory = [];
         localStorage.clear();
-        renderSearchHistory();
+        renderSearchHistory();  // Renders the empty results
     })
 
+    // Converts Kelvin to Farenheit 
     function k2f(K) {
         return Math.floor((K - 273.15) *1.8 +32);
     }
 
+    // Append search history to history form
     function renderSearchHistory() {
         historyEl.innerHTML = "";
         for (let i = 0; i < searchHistory.length; i++) {
+            // Input element is created so the search history is clickable
             const historyItem = document.createElement("input");
             historyItem.setAttribute("type","text");
             historyItem.setAttribute("readonly",true);
             historyItem.setAttribute("class", "form-control d-block bg-white");
             historyItem.setAttribute("value", searchHistory[i]);
+            // When the listed item is click, run the getWeather function
             historyItem.addEventListener("click",function() {
                 getWeather(historyItem.value);
             })
@@ -121,11 +131,13 @@ function initPage() {
         }
     }
 
+    // Uses the last item in the search history array to run getWeather and render the results 
     renderSearchHistory();
     if (searchHistory.length > 0) {
         getWeather(searchHistory[searchHistory.length - 1]);
     }
 
+    // Identifies the geolocation of the computer
     function getLocation() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function (position) {
@@ -137,17 +149,17 @@ function initPage() {
         } 
       }
 
+      // Call for current weather based on coordinates
       function getCurWeather() {
         // Variable for current weather
         var urlCurrent = "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&Appid=" + APIKey + "&units=imperial";
-        
         $.ajax({
             url: urlCurrent,
             method: "GET"
         }).then(function(response){
-            console.log(response);
             var cityName = response.name;
             getWeather(cityName);
+            // Adds the search history functionality
             searchHistory.push(cityName);
             localStorage.setItem("search",JSON.stringify(searchHistory));
             renderSearchHistory();
